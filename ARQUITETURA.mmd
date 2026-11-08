@@ -1,0 +1,11 @@
+flowchart TD
+  U["Usuário no navegador<br/>HTML, CSS e JavaScript"] -->|"HTTPS na prévia / HTTP local"| S["Spring Security<br/>Sessão, perfis e CSRF"]
+  S --> C["Controllers REST<br/>Java 21 / Spring Boot"]
+  C --> R["PilotRepository<br/>JDBC e transações"]
+  R --> D[("H2 em arquivo<br/>Relatos, histórico e rede")]
+  C --> P["RoutePlanner<br/>Dijkstra em Java"]
+  R -->|"Nós, trechos e bloqueios"| P
+  P -->|"Percurso e avisos"| C
+  C -->|"Agregações SQL"| I["Indicadores<br/>Base sintética"]
+  U -. "Link de orientação, não API" .-> A["Atende+<br/>Canal oficial externo"]
+  N["Rede de teste<br/>Sem GPS e sem SPTrans ao vivo"] -.-> D

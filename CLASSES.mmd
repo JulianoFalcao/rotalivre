@@ -1,0 +1,19 @@
+classDiagram
+  class RotaLivreApplication { +main(args) }
+  class Models { +Node +Edge +Report +History +Transport +RouteResult +Constraints }
+  class PilotController { +network() +route() +create() +update() +stats() }
+  class PilotRepository { +nodes() +edges() +blockedEdges() +create() +update() +history() +stats() }
+  class RoutePlanner { +calculate() -shortest() }
+  class SecurityConfig { +users() +security() }
+  class DemoSeed { +run() }
+  class JdbcTemplate
+  class ApiErrors { +controlled() +invalid() +unavailable() }
+  PilotController --> PilotRepository
+  PilotController --> RoutePlanner
+  PilotRepository --> Models
+  RoutePlanner --> Models
+  RotaLivreApplication --> PilotController : bootstrap
+  SecurityConfig ..> PilotController : protege HTTP
+  DemoSeed --> JdbcTemplate : fixtures
+  PilotRepository --> JdbcTemplate : SQL
+  ApiErrors ..> PilotController : respostas de erro

@@ -1,0 +1,32 @@
+erDiagram
+  network_node ||--o{ network_edge : "origem e destino"
+  network_node ||--o{ transport_option : "referencia"
+  network_edge ||--o{ barrier_report : "recebe"
+  barrier_report ||--o{ report_history : "preserva"
+  network_node {
+    int id PK
+    string label
+    boolean synthetic
+  }
+  network_edge {
+    int id PK
+    int from_node FK
+    int to_node FK
+    double distance_m
+  }
+  barrier_report {
+    long id PK
+    int edge_id FK
+    string status
+    boolean blocks_path
+  }
+  report_history {
+    long id PK
+    long report_id FK
+    string new_status
+  }
+  transport_option {
+    int id PK
+    int node_id FK
+    string accessibility
+  }

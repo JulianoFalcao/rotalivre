@@ -1,0 +1,14 @@
+flowchart TD
+  A["Selecionar origem e destino da rede de teste"] --> B["Java lê rede e bloqueios no banco"]
+  B --> C["Excluir dados desconhecidos, antigos<br/>e trechos fora dos critérios"]
+  C --> D["Dijkstra calcula caminho"]
+  D --> E{"Existe caminho elegível?"}
+  E -- "Não" --> F["Avisar limites dos dados<br/>Não inventar alternativa"]
+  E -- "Sim" --> G["Exibir esquema e lista textual<br/>Distância sintética e avisos"]
+  G --> H["Usuário autenticado registra barreira<br/>Sessão e CSRF exigidos"]
+  H --> I["Transação JDBC<br/>Relato + histórico inicial"]
+  I --> J["Relato bloqueante pendente<br/>suspende trecho conservadoramente"]
+  J --> B
+  I --> K["Moderador autorizado revisa<br/>Confirma, rejeita ou resolve"]
+  K --> L["Transação: status + histórico<br/>Sem sobrescrever finalizados"]
+  L --> B

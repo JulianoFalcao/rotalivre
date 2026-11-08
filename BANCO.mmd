@@ -1,0 +1,61 @@
+erDiagram
+  network_node ||--o{ network_edge : "origem"
+  network_node ||--o{ network_edge : "destino"
+  network_edge ||--o{ barrier_report : "recebe"
+  barrier_report ||--o{ report_history : "preserva"
+  network_node ||--o{ transport_option : "referencia"
+  network_node {
+    int id PK
+    string label
+    int x "coordenada do esquema, nao GPS"
+    int y "coordenada do esquema, nao GPS"
+    string kind
+    boolean synthetic
+  }
+  network_edge {
+    int id PK
+    int from_node FK
+    int to_node FK
+    double distance_m "ficticia"
+    int width_cm
+    double slope_pct
+    boolean step_free
+    string surface
+    string condition_status
+    long verified_at "data da fixture"
+    string source
+    boolean bidirectional
+    boolean synthetic
+  }
+  barrier_report {
+    long id PK
+    int edge_id FK
+    string category
+    string description
+    boolean blocks_path
+    string status
+    long created_at
+    long updated_at
+    string reporter "nao exposto na API"
+    boolean synthetic
+  }
+  report_history {
+    long id PK
+    long report_id FK
+    string previous_status
+    string new_status
+    string note
+    string actor "nao exposto na API"
+    long created_at
+  }
+  transport_option {
+    int id PK
+    int node_id FK
+    string label
+    string mode
+    string accessibility
+    string information
+    string source
+    long updated_at
+    boolean synthetic
+  }
