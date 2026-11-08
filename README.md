@@ -1,31 +1,12 @@
 # Rota Livre — piloto CitizenTech
 
-**Juliano de Oliveira Falcão — RM 565907.** Versão inicial 0.1.0, 07/11/2026. Independente do ArboriGov SP.
+**Juliano de Oliveira Falcão — RM 565907.** 
 
 Mobilidade com menos barreiras: consultar uma rota sobre um grafo sintético, registrar uma barreira no banco e recalcular; moderar o relato com histórico e examinar estatísticas SQL. Referência territorial: entorno do Terminal Santo Amaro, Zona Sul de São Paulo.
 
-> Não é GPS, mapa cadastral ou serviço de mobilidade operacional. Os 12 pontos, 20 trechos, distâncias, atributos e relatos são de demonstração. Não utilizar os percursos para deslocamento real. Não há integração com SPTrans, veículo confirmado ou reserva Atende+.
 
-## Executar localmente
 
-Requisitos: **JDK 21**, **Maven 3.6.3+**, **Python 3** apenas para gerar credenciais pelo script e **Bash** para `run.sh`. Não requer conta em nuvem nem token SPTrans.
 
-```bash
-mvn test
-mvn package
-PORT=8085 ./run.sh
-# Abrir http://localhost:8085
-```
-
-Na primeira execução, `run.sh` gera duas senhas aleatórias em `data/.credentials.env`, com permissão restrita. Não publicar esse arquivo. Contas: `cidadao` (CITIZEN) e `moderador` (ADMIN). Consultas públicas; inserções autenticadas; revisão somente ADMIN. Senhas são codificadas com BCrypt na memória. As contas são específicas para o demonstrador, não um cadastro de cidadãos reais.
-
-Sem Bash/Python, configure `ROTA_CITIZEN_PASSWORD` e `ROTA_ADMIN_PASSWORD` com senhas diferentes de pelo menos 14 caracteres e execute:
-
-```bash
-java -Xmx256m -jar target/rota-livre-0.1.0.jar --server.port=8085
-```
-
-Não há senhas reais no fonte. As senhas presentes nos testes são exclusivas do ambiente de testes.
 
 ## Banco
 
@@ -79,12 +60,4 @@ HTML semântico, CSS responsivo e JavaScript sem framework, servidos pelo própr
 - `docs/WIREFRAMES.html`: esboços editáveis; `docs/WIREFRAMES.pdf`: versão para consulta.
 - `docs/CONSULTAS_SQL.sql`: consultas reproduzíveis.
 
-## Prévia e publicação
 
-A prévia nesta sessão usa o Java na porta 8085 e o encaminhamento HTTPS temporário do sandbox; pode parar quando a sessão hibernar e não é domínio permanente. A criação de um segundo projeto gerenciado nesta conversa foi bloqueada. Não alteramos nem reutilizamos o projeto ArboriGov para contornar isso.
-
-Antes de publicar um serviço real: ambiente independente compatível com Java, banco gerenciado ou volume durável, TLS, `ROTA_COOKIE_SECURE=true`, gestão de identidades, limites de requisições/login, monitoramento, backup/restauração, verificação de dados reais e avaliação com usuários. Contas compartilhadas e H2 de demonstração não são desenho de produção.
-
-## Entrega acadêmica ainda a finalizar
-
-Enunciado requer dois vídeos diferentes, no máximo três minutos cada: comercial sem implementação; técnico com Java, inserção/leitura/atualização, código e decisões. Seus links reais devem entrar no `.txt` do ZIP final. Não há vídeo publicado nem submissão FIAP deste projeto nesta etapa. Limite indicado: 19/11/2026, sem tolerância de três dias.
